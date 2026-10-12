@@ -33,7 +33,7 @@
   </header>
   <main>
     <section class="hero" id="top" aria-labelledby="mainTitle">
-      <video class="ambient" id="openingVideo" src="assets/film-01.mp4" poster="assets/portrait-01.jpg" autoplay muted loop playsinline preload="auto" aria-label="开场：白龙仙君角色影片，循环播放"></video>
+      <video class="ambient" id="openingVideo" poster="assets/portrait-01.jpg" autoplay muted loop playsinline preload="auto" aria-label="开场：白龙仙君角色影片，循环播放"></video>
       <div class="hero-content">
         <div class="hero-kicker eyebrow">AN EASTERN FANTASY ANTHOLOGY · 东方幻想志</div>
         <h1 id="mainTitle">IMMORTAL<span class="second">REALMS</span></h1>
@@ -57,7 +57,7 @@
       <div class="collection-foot"><span>05 FILM STUDIES · ONE MYTHIC UNIVERSE</span><span class="cn">观其形 · 入其境</span></div>
     </section>
     <section class="epilogue" id="epilogue" aria-labelledby="epilogueTitle">
-      <video class="ambient" id="closingVideo" src="assets/film-07.mp4" poster="assets/portrait-07.jpg" autoplay muted loop playsinline preload="metadata" aria-label="结尾：九尾灵狐角色影片，循环播放"></video>
+      <video class="ambient" id="closingVideo" poster="assets/portrait-07.jpg" autoplay muted loop playsinline preload="metadata" aria-label="结尾：九尾灵狐角色影片，循环播放"></video>
       <div class="epilogue-content"><div class="eyebrow gold">THE EPILOGUE / 终章</div><h2 id="epilogueTitle">EVERY ENDING.<br><em>A NEW ASCENSION.</em></h2><p>山海无尽，仙途未央。</p><button class="text-link" data-film="6">ENTER THE BEYOND <span class="arrow">↗</span></button></div>
       <div class="hero-bottom"><div class="chapter-note"><span class="number">07</span><div class="eyebrow">THE BEYOND<span>九尾归境 / CLOSING FILM</span></div></div><div class="loop-control"><span class="status-dot"></span>LOOPING FILM<button data-pause="closingVideo" aria-label="暂停结尾视频" aria-pressed="false">Ⅱ</button></div></div>
     </section>
@@ -65,7 +65,7 @@
   <footer class="footer"><a class="footer-wordmark" href="#top">IMMORTAL REALMS<span>仙境录</span></a><p class="eyebrow">EASTERN FANTASY · CHARACTER DESIGN · MOTION STUDIES</p><a class="to-top" href="#top">BACK TO THE ORIGIN <span>↑</span></a></footer>
   <dialog id="filmDialog" aria-labelledby="filmTitle">
     <div class="modal-header"><div><p class="eyebrow" id="filmCategory">CHARACTER STUDY</p><h2 id="filmTitle">The Dragon Sovereign</h2></div><button class="close-modal" id="closeModal" aria-label="关闭视频">×</button></div>
-    <div class="modal-stage"><video id="filmPlayer" controls playsinline preload="metadata"></video><div class="media-error" id="mediaError" role="status" hidden>视频暂时无法播放，请确认 assets 文件夹与网页放在一起。<br><a id="fallbackVideo" href="assets/film-01.mp4" target="_blank" rel="noopener">直接打开视频 ↗</a></div></div>
+    <div class="modal-stage"><video id="filmPlayer" controls playsinline preload="metadata"></video><div class="media-error" id="mediaError" role="status" hidden>视频暂时无法播放，请稍后重试或直接打开原片。<br><a id="fallbackVideo" href="#" target="_blank" rel="noopener">直接打开视频 ↗</a></div></div>
     <div class="modal-bottom"><p id="filmCaption">御龙仙君</p><div class="modal-navigation"><button id="prevFilm">← PREVIOUS</button><button id="nextFilm">NEXT →</button></div></div>
   </dialog>
   <script>
@@ -84,7 +84,14 @@
       const ambients=[...document.querySelectorAll('.ambient')];
       const visible=new Set(),pausedByUser=new Set();
       let current=0,sound=false,lastTrigger=null,playRequest=0;
-      const asset=(index,type)=>'assets/'+(type==='video'?'film-':'portrait-')+String(index+1).padStart(2,'0')+(type==='video'?'.mp4':'.jpg');
+      const hosted=location.hostname==='lxw611.github.io';
+      const releaseBase='https://github.com/lxw611/xianxia-skill-showcase/releases/download/original-videos-v1/';
+      const asset=(index,type)=>{
+        const file=(type==='video'?'film-':'portrait-')+String(index+1).padStart(2,'0')+(type==='video'?'.mp4':'.jpg');
+        return hosted&&type==='video'?releaseBase+file:'assets/'+file;
+      };
+      document.getElementById('openingVideo').src=asset(0,'video');
+      document.getElementById('closingVideo').src=asset(6,'video');
       function syncBackground(){
         let audible=ambients.find(v=>visible.has(v)&&!pausedByUser.has(v));
         ambients.forEach(v=>{
