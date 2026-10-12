@@ -85,10 +85,10 @@
       const visible=new Set(),pausedByUser=new Set();
       let current=0,sound=false,lastTrigger=null,playRequest=0;
       const hosted=location.hostname==='lxw611.github.io';
-      const releaseBase='https://github.com/lxw611/xianxia-skill-showcase/releases/download/original-videos-v1/';
+      const mediaBase='https://media.githubusercontent.com/media/lxw611/xianxia-skill-showcase/main/assets/';
       const asset=(index,type)=>{
         const file=(type==='video'?'film-':'portrait-')+String(index+1).padStart(2,'0')+(type==='video'?'.mp4':'.jpg');
-        return hosted&&type==='video'?releaseBase+file:'assets/'+file;
+        return hosted&&type==='video'?mediaBase+file:'assets/'+file;
       };
       document.getElementById('openingVideo').src=asset(0,'video');
       document.getElementById('closingVideo').src=asset(6,'video');
