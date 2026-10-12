@@ -85,7 +85,7 @@
       const visible=new Set(),pausedByUser=new Set();
       let current=0,sound=false,lastTrigger=null,playRequest=0;
       const hosted=location.hostname==='lxw611.github.io';
-      const mediaBase='https://media.githubusercontent.com/media/lxw611/xianxia-skill-showcase/main/assets/';
+      const mediaBase='https://media.githubusercontent.com/media/lxw611/xianxia-skill-showcase/c06e224c98becc82555a95bd4a8daf71c0f8da78/assets/';
       const asset=(index,type)=>{
         const file=(type==='video'?'film-':'portrait-')+String(index+1).padStart(2,'0')+(type==='video'?'.mp4':'.jpg');
         return hosted&&type==='video'?mediaBase+file:'assets/'+file;
