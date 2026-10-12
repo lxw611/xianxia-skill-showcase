@@ -13,6 +13,8 @@ https://lxw611.github.io/xianxia-skill-showcase/
 - 开场、角色影片弹窗与终章交互
 - 桌面端和移动端响应式布局
 
+线上页面直接播放 GitHub Releases 中的原始画质视频；本地打开时使用项目 `assets` 目录中的原片。
+
 ## 本地查看
 
 直接使用浏览器打开 `index.html`。
